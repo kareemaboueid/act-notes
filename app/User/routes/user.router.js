@@ -18,6 +18,7 @@ import { path_strings } from '../../../constants/path_strings.cnst.js';
  */
 const user_router = express.Router();
 
+// TODO [validate] validate and sanitize user input data:
 user_router.post(path_strings.user.create, ctrl_user_create);
 
 user_router.post(path_strings.user.login, ctrl_user_login);

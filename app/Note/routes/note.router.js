@@ -16,6 +16,7 @@ import { path_strings } from '../../../constants/path_strings.cnst.js';
  */
 const note_router = express.Router();
 
+// TODO [validate] validate and sanitize user input data:
 note_router.post(path_strings.note.self, mdwr_authenticate_route, ctrl_note_create);
 note_router.get(path_strings.note.self, mdwr_authenticate_route, ctrl_note_get);
 note_router.patch(path_strings.note.self, mdwr_authenticate_route, ctrl_note_patch);
