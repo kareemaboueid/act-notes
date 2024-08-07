@@ -1,0 +1,72 @@
+import mongoose from 'mongoose';
+import * as EmailValidator from 'email-validator';
+import vld_validate_password from '../../../validations/validate_password.vld.js';
+import { db_structure } from '../../../constants/db_structure.cnst.js';
+
+/** ### User Schema */
+const user_schema = new mongoose.Schema(
+  // ------ START ------ //
+
+  {
+    USER_FULLNAME: {
+      type: String,
+      required: [true, 'Full name is required'],
+      trim: true,
+      maxlength: [255, 'Full name is too long, maximum 255 characters'],
+    },
+
+    USER_EMAIL: {
+      type: String,
+      required: [true, 'Email address is required'],
+      trim: true,
+      lowercase: true,
+      unique: true,
+      maxlength: [255, 'Full name is too long, maximum 255 characters'],
+      validate(_value) {
+        if (!EmailValidator.validate(_value)) {
+          throw new Error(`${_value} is not a valid email address`);
+        }
+      },
+    },
+
+    USER_USERNAME: {
+      type: String,
+      required: [true, 'Username is required'],
+      trim: true,
+      lowercase: true,
+      unique: true,
+      index: true,
+      minlength: [3, 'Username is too short, minimum 3 characters'],
+      maxlength: [50, 'Username is too long, maximum 50 characters'],
+    },
+
+    USER_PASSWORD: {
+      type: String,
+      required: [true, 'Password is required'],
+      trim: true,
+      validate(_value) {
+        vld_validate_password(_value);
+      },
+    },
+
+    FLAG_FREEZE: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  {
+    timestamps: true,
+    collection: db_structure.user.coll,
+    versionKey: false,
+  },
+
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
+
+  // ------ END ------ //
+);
+
+export default user_schema;
