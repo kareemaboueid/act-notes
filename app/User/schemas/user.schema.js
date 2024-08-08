@@ -8,19 +8,23 @@ const user_schema = new mongoose.Schema(
   // ------ START ------ //
 
   {
+    USER_IMAGE: {
+      type: String,
+    },
+
     USER_FULLNAME: {
       type: String,
-      required: [true, 'Full name is required'],
       trim: true,
+      required: [true, 'Full name is required'],
       maxlength: [255, 'Full name is too long, maximum 255 characters'],
     },
 
     USER_EMAIL: {
       type: String,
-      required: [true, 'Email address is required'],
       trim: true,
       lowercase: true,
       unique: true,
+      required: [true, 'Email address is required'],
       maxlength: [255, 'Full name is too long, maximum 255 characters'],
       validate(_value) {
         if (!EmailValidator.validate(_value)) {
@@ -31,19 +35,19 @@ const user_schema = new mongoose.Schema(
 
     USER_USERNAME: {
       type: String,
-      required: [true, 'Username is required'],
       trim: true,
       lowercase: true,
       unique: true,
       index: true,
+      required: [true, 'Username is required'],
       minlength: [3, 'Username is too short, minimum 3 characters'],
       maxlength: [50, 'Username is too long, maximum 50 characters'],
     },
 
     USER_PASSWORD: {
       type: String,
-      required: [true, 'Password is required'],
       trim: true,
+      required: [true, 'Password is required'],
       validate(_value) {
         vld_validate_password(_value);
       },
