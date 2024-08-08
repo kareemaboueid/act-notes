@@ -24,7 +24,7 @@ import mdwr_handle_error from './middlewares/handle_errors.mdwr.js';
 import { NODE_ENV, PORT } from './configs/env/env.cnfg.js';
 
 // CONFIGS & DB:
-import database_connect from './configs/db/connect.cnfg.js';
+import database_connect from './configs/db/database_connect.cnfg.js';
 import server_listen from './configs/server/server_listen.cnfg.js';
 import { path_strings } from './constants/path_strings.cnst.js';
 import logger from './configs/logging/logger.cnfg.js';
