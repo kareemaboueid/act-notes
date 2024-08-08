@@ -8,6 +8,8 @@ const {
   NODE_ENV,
   PORT,
   SALT_ROUNDS,
+  JWT_NAME,
+  JWT_SECRET,
   DB_USERNAME,
   DB_PASSWORD,
   DB_CLOUD_REAL,
@@ -33,6 +35,18 @@ export {
    * @description The number of rounds to use when bcrypting.
    */
   SALT_ROUNDS,
+
+  /**
+   * @name JWT_NAME
+   * @description The name of the JWT cookie.
+   */
+  JWT_NAME,
+
+  /**
+   * @name JWT_SECRET
+   * @description The secret key for the JWT.
+   */
+  JWT_SECRET,
 
   /**
    * @name DB_USERNAME
