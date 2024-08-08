@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 import Note_model from '../models/note.model.js';
 import User_model from '../../User/models/user.model.js';
-import hlp_jsend from '../../../utilities/json_send.hlp.js';
+import utl_jsend from '../../../utilities/json_send.utl.js';
 
 /**
  * ### Note create controller.
@@ -65,7 +65,7 @@ const ctrl_note_create = asyncHandler(async (_request, _response) => {
     const new_note = await Note_model.create(note_payload);
 
     // send success response:
-    _response.status(StatusCodes.CREATED).json(hlp_jsend(StatusCodes.CREATED, new_note));
+    _response.status(StatusCodes.CREATED).json(utl_jsend(StatusCodes.CREATED, new_note));
 
     // ------ HANDLE ERRORS ------ //
   } catch (_error) {

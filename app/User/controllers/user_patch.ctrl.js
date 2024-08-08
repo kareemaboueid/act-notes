@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 import User_model from '../models/user.model.js';
-// import hlp_jsend from '../../../helpers/json_send.hlp.js';
+// import utl_jsend from '../../../helpers/json_send.utl.js';
 
 /**
  * ### Controller `ctrl_user_patch()`

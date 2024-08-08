@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 import User_model from '../models/user.model.js';
-import hlp_jsend from '../../../utilities/json_send.hlp.js';
+import utl_jsend from '../../../utilities/json_send.utl.js';
 
 /**
  * ### Controller `ctrl_user_get()`
@@ -31,7 +31,7 @@ const ctrl_user_get = asyncHandler(async (_request, _response) => {
     // send success response:
     _response
       .status(StatusCodes.OK)
-      .json(hlp_jsend(StatusCodes.OK, await USER.exclude('USER_PASSWORD')));
+      .json(utl_jsend(StatusCodes.OK, await USER.exclude('USER_PASSWORD')));
 
     // ------ HANDLE ERRORS ------ //
   } catch (_error) {

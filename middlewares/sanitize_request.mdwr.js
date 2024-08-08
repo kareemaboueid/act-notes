@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 import { body } from 'express-validator';
-import hlp_error_send from '../utilities/error_send.hlp.js';
+import utl_error_send from '../utilities/error_send.hlp.js';
 
 /** ### Middleware for sanitizing requests. */
 
@@ -25,7 +25,7 @@ const mdwr_sanitize_request = asyncHandler(async (_request, _response, _next) =>
     if (!result.isEmpty()) {
       _response
         .status(StatusCodes.BAD_REQUEST)
-        .json(hlp_error_send(StatusCodes.BAD_REQUEST, result.array()));
+        .json(utl_error_send(StatusCodes.BAD_REQUEST, result.array()));
     }
   });
 

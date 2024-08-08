@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import hlp_error_send from '../utilities/error_send.hlp.js';
+import utl_error_send from '../utilities/error_send.utl.js';
 
 /**
  * ### Middleware for handling errors.
@@ -50,7 +50,7 @@ const mdwr_handle_error = (_error, _request, _response, _next) => {
   // ------ HANDLE ERRORS ------ //
   _response
     .status(error_code)
-    .json(hlp_error_send(error_code, error_message, error_stack));
+    .json(utl_error_send(error_code, error_message, error_stack));
 
   _next();
 

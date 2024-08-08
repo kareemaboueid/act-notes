@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 import Note_model from '../models/note.model.js';
-import hlp_jsend from '../../../utilities/json_send.hlp.js';
+import utl_jsend from '../../../utilities/json_send.utl.js';
 
 /**
  * ### Note patch controller.
@@ -48,7 +48,7 @@ const ctrl_note_patch = asyncHandler(async (_request, _response) => {
     );
 
     // send success response:
-    _response.status(StatusCodes.OK).json(hlp_jsend(StatusCodes.OK, note_patched));
+    _response.status(StatusCodes.OK).json(utl_jsend(StatusCodes.OK, note_patched));
 
     // ------ HANDLE ERRORS ------ //
   } catch (_error) {
