@@ -8,15 +8,14 @@ const note_schema = new mongoose.Schema(
   {
     NOTE_TITLE: {
       type: String,
-      required: [true, 'Title is required'],
       Unique: true,
       index: true,
       trim: true,
+      required: [true, 'Title is required'],
     },
 
     NOTE_CONTENT: {
       type: String,
-      required: [true, 'Content is required'],
       default: 'No content',
     },
 
