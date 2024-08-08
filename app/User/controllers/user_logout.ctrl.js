@@ -11,6 +11,8 @@ const ctrl_user_logout = asyncHandler(async (_request, _response) => {
   try {
     // ------ START ------ //
 
+    // TODO [cookie w/JWT] clear JWT cookie:
+
     // send success response:
     _response.status(StatusCodes.OK).json({ message: 'User has been logged out.' });
 
