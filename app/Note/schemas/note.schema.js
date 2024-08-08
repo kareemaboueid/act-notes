@@ -39,14 +39,14 @@ const note_schema = new mongoose.Schema(
       default: false,
     },
 
-    createdBy: {
+    CREATED_BY: {
       type: mongoose.Schema.Types.ObjectId,
       ref: db_structure.user.model,
     },
   },
 
   {
-    timestamps: true,
+    timestamps: { createdAt: 'CREATED_AT', updatedAt: 'UPDATED_AT' },
     collection: db_structure.note.coll,
     versionKey: false,
   },
