@@ -18,15 +18,12 @@ import { path_strings } from '../../../constants/path_strings.cnst.js';
  */
 const user_router = express.Router();
 
-// TODO [validate] validate and sanitize user input data:
+// TODO [sanitize] sanitize user input data:
+
 user_router.post(path_strings.user.create, ctrl_user_create);
-
 user_router.post(path_strings.user.login, ctrl_user_login);
-
 user_router.post(path_strings.user.logout, ctrl_user_logout);
-
 user_router.get(path_strings.user.username, mdwr_authenticate_route, ctrl_user_get);
-
 user_router.patch(path_strings.user.username, mdwr_authenticate_route, ctrl_user_patch);
 
 export default user_router;
