@@ -22,7 +22,6 @@ const user_schema = new mongoose.Schema(
     USER_EMAIL: {
       type: String,
       trim: true,
-      lowercase: true,
       unique: true,
       required: [true, 'Email address is required'],
       maxlength: [255, 'Full name is too long, maximum 255 characters'],
@@ -36,12 +35,10 @@ const user_schema = new mongoose.Schema(
     USER_USERNAME: {
       type: String,
       trim: true,
-      lowercase: true,
       unique: true,
       index: true,
       required: [true, 'Username is required'],
-      minlength: [3, 'Username is too short, minimum 3 characters'],
-      maxlength: [50, 'Username is too long, maximum 50 characters'],
+      maxlength: [255, 'Full name is too long, maximum 255 characters'],
     },
 
     USER_PASSWORD: {
@@ -60,7 +57,7 @@ const user_schema = new mongoose.Schema(
   },
 
   {
-    timestamps: true,
+    timestamps: { createdAt: 'CREATED_AT', updatedAt: 'UPDATED_AT' },
     collection: db_structure.user.coll,
     versionKey: false,
   },
