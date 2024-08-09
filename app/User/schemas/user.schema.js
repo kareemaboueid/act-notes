@@ -23,6 +23,7 @@ const user_schema = new mongoose.Schema(
       type: String,
       trim: true,
       unique: true,
+      syncIndexes: true,
       required: [true, 'Email address is required'],
       maxlength: [255, 'Full name is too long, maximum 255 characters'],
       validate(_value) {
@@ -37,6 +38,7 @@ const user_schema = new mongoose.Schema(
       trim: true,
       unique: true,
       index: true,
+      syncIndexes: true,
       required: [true, 'Username is required'],
       maxlength: [255, 'Full name is too long, maximum 255 characters'],
     },
