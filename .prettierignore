@@ -9,3 +9,5 @@ build/
 
 # Ignore package-lock.json
 package-lock.json
+.eslintrc.json
+.markdownlint.json
