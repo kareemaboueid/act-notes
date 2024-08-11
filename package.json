@@ -5,7 +5,8 @@
   "scripts": {
     "server:dev": "NODE_ENV=development nodemon index.js",
     "server:build": "NODE_ENV=production nodemon index.js",
-    "server:lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+    "server:lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "server:format": "prettier --write ."
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
