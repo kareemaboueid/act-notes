@@ -1,9 +1,9 @@
 import express from 'express';
-import ctrl_user_create from '../controllers/user_create.ctrl.js';
-import ctrl_user_login from '../controllers/user_login.ctrl.js';
-import ctrl_user_logout from '../controllers/user_logout.ctrl.js';
-import ctrl_user_get from '../controllers/user_get.ctrl.js';
-import ctrl_user_patch from '../controllers/user_patch.ctrl.js';
+import ctrl_user_create from '../../controllers/user/user_create.ctrl.js';
+import ctrl_user_login from '../../controllers/user/user_login.ctrl.js';
+import ctrl_user_logout from '../../controllers/user/user_logout.ctrl.js';
+import ctrl_user_get from '../../controllers/user/user_get.ctrl.js';
+import ctrl_user_patch from '../../controllers/user/user_patch.ctrl.js';
 import mw_authenticate_route from '../../../middlewares/authenticate_route.mw.js';
 
 /**

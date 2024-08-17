@@ -14,8 +14,8 @@ import helmet from 'helmet';
 import mongoose from 'mongoose';
 
 // ROUTERS:
-import { user_router, user_endpoints } from './src/User/routes/user.router.js';
-import { note_router, note_endpoints } from './src/Note/routes/note.router.js';
+import { user_router, user_endpoints } from './src/routes/user/user.routes.js';
+import { note_router, note_endpoints } from './src/routes/note/note.routes.js';
 
 // MIDDLEWARES:
 import mw_handle_global_errors from './middlewares/handle_global_errors.mw.js';
@@ -27,8 +27,8 @@ import { NODE_ENV, PORT } from './configs/env.cnfg.js';
 import database_connect from './database/connect/database_connect.js';
 import server_listen from './configs/server_listen.cnfg.js';
 import logger from './logging/logger.js';
-import user_schema from './src/User/schemas/user.schema.js';
-import note_schema from './src/Note/schemas/note.schema.js';
+import user_schema from './src/schemas/user/user.schema.js';
+import note_schema from './src/schemas/note/note.schema.js';
 import user_db_naming from './database/namings/user_naming.js';
 import note_db_naming from './database/namings/note_naming.js';
 

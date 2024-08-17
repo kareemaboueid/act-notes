@@ -1,8 +1,8 @@
 import express from 'express';
-import ctrl_note_create from '../controllers/note_create.ctrl.js';
-import ctrl_note_get_all from '../controllers/note_get_all.ctrl.js';
-import ctrl_note_get from '../controllers/note_get.ctrl.js';
-import ctrl_note_patch from '../controllers/note_patch.ctrl.js';
+import ctrl_note_create from '../../controllers/note/note_create.ctrl.js';
+import ctrl_note_get_all from '../../controllers/note/note_get_all.ctrl.js';
+import ctrl_note_get from '../../controllers/note/note_get.ctrl.js';
+import ctrl_note_patch from '../../controllers/note/note_patch.ctrl.js';
 import mw_authenticate_route from '../../../middlewares/authenticate_route.mw.js';
 
 /**

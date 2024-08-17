@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import user_schema from '../schemas/user.schema.js';
+import user_schema from '../../schemas/user/user.schema.js';
 import { SALT_ROUNDS } from '../../../configs/env.cnfg.js';
 import user_db_naming from '../../../database/namings/user_naming.js';
 

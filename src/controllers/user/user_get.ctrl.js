@@ -1,31 +1,20 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
-import User_model from '../models/user.model.js';
-// import res_jsend from '../../../helpers/json_send.utl.js';
+import User_model from '../../models/user/user.model.js';
+import res_jsend from '../../../res/jsend.res.js';
 
 /**
- * ### Controller `ctrl_user_patch()`
+ * ### Controller `ctrl_user_get()`
  * @access Private
- * @method PATCH
+ * @method GET
  * @route `/v1/users/:username`
  */
-const ctrl_user_patch = asyncHandler(async (_request, _response) => {
+const ctrl_user_get = asyncHandler(async (_request, _response) => {
   try {
     // ------ START ------ //
 
     // get data from client:
     const { username: eup_user_username } = _request.params;
-    const {
-      password: eud_user_password,
-      confirm_password: eud_user_confirm_password,
-    } = _request.body;
-
-    // check if password and confirm password match:
-    if (eud_user_password !== eud_user_confirm_password) {
-      // send error response:
-      _response.status(StatusCodes.BAD_REQUEST);
-      throw new Error('Password and confirm password do not match');
-    }
 
     // database user query:
     const USER = await User_model.findOne({
@@ -36,8 +25,13 @@ const ctrl_user_patch = asyncHandler(async (_request, _response) => {
     if (!USER) {
       // send error response:
       _response.status(StatusCodes.BAD_REQUEST);
-      throw new Error('User not found, try register or login');
+      throw new Error('User not found');
     }
+
+    // send success response:
+    _response
+      .status(StatusCodes.OK)
+      .json(res_jsend(StatusCodes.OK, await USER.exclude('USER_PASSWORD')));
 
     // ------ HANDLE ERRORS ------ //
   } catch (_error) {
@@ -49,4 +43,4 @@ const ctrl_user_patch = asyncHandler(async (_request, _response) => {
   // ------ END ------ //
 });
 
-export default ctrl_user_patch;
+export default ctrl_user_get;

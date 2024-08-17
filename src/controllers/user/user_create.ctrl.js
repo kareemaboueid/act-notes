@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
-import User_model from '../models/user.model.js';
+import User_model from '../../models/user/user.model.js';
 import res_jsend from '../../../res/jsend.res.js';
 
 /**
