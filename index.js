@@ -14,22 +14,23 @@ import helmet from 'helmet';
 import mongoose from 'mongoose';
 
 // ROUTERS:
-import user_router from './app/User/routes/user.router.js';
-import note_router from './app/Note/routes/note.router.js';
+import { user_router, user_endpoints } from './src/User/routes/user.router.js';
+import { note_router, note_endpoints } from './src/Note/routes/note.router.js';
 
 // MIDDLEWARES:
-import mdwr_handle_error from './middlewares/handle_errors.mdwr.js';
+import mw_handle_global_errors from './middlewares/handle_global_errors.mw.js';
 
 // ENVIRONMENT VARIABLES:
-import { NODE_ENV, PORT } from './configs/env/env.cnfg.js';
+import { NODE_ENV, PORT } from './configs/env.cnfg.js';
 
 // CONFIGS & DB:
-import database_connect from './configs/db/database_connect.cnfg.js';
-import server_listen from './configs/server/server_listen.cnfg.js';
-import { path_strings } from './constants/path_strings.cnst.js';
-import logger from './configs/logging/logger.cnfg.js';
-import user_schema from './app/User/schemas/user.schema.js';
-import note_schema from './app/Note/schemas/note.schema.js';
+import database_connect from './database/connect/database_connect.js';
+import server_listen from './configs/server_listen.cnfg.js';
+import logger from './logging/logger.js';
+import user_schema from './src/User/schemas/user.schema.js';
+import note_schema from './src/Note/schemas/note.schema.js';
+import user_db_naming from './database/namings/user_naming.js';
+import note_db_naming from './database/namings/note_naming.js';
 
 // APP INITIALIZATION:
 const app = express();
@@ -46,17 +47,17 @@ app.use(cookieParser());
 if (NODE_ENV === 'development') {
   app.use(morgan('dev'));
   mongoose.set('debug', true);
-  logger.env({ level: 'debug' });
-  logger.is_schema_strict('User', note_schema.options.strict);
-  logger.is_schema_strict('Note', user_schema.options.strict);
+  logger.node_env({ level: 'debug' });
+  logger.is_schema_strict(user_db_naming.M, note_schema.options.strict);
+  logger.is_schema_strict(note_db_naming.M, user_schema.options.strict);
 }
 
 // SERVER ROUTERS:
-app.use(path_strings.user.root, user_router);
-app.use(path_strings.note.root, note_router);
+app.use(user_endpoints.root, user_router);
+app.use(note_endpoints.root, note_router);
 
 // ERROR HANDLING:
-app.use(mdwr_handle_error);
+app.use(mw_handle_global_errors);
 
 // RUN SERVER:
 database_connect();
