@@ -14,18 +14,16 @@ const logger = {
    * @param {Object} _log_options - The options for the log.
    * @param {(string|string[])} _log_message - The message to log.
    */
-  set: (_log_options = { _level: {}, _source: {} }, _log_message = []) => {
-    _log_options._level = _log_options || { level: 'info' };
-    _log_options._source = _log_options || { source: 'app' };
+  set: (_log_options, _log_message = [] || '') => {
+    const { level } = _log_options;
+    const { source } = _log_options;
 
-    const { level } = _log_options._level;
-    const { source } = _log_options._source;
     const messages = Array.isArray(_log_message)
       ? _log_message
       : [_log_message];
 
     const log = winston_setup(level, source);
-    log.log(level, messages.join(' | '));
+    log.log(level, messages.join(', '));
   },
   // ---------------------------------------------------------
 
@@ -35,10 +33,8 @@ const logger = {
    * @param {Object} _log_options - The options for the log.
    * @param {string} _error_message - The error message to log.
    */
-  error: (_log_options = { _source: {} }, _error_message = '') => {
-    _log_options._source = _log_options || { source: 'app' };
-
-    const { source } = _log_options._source;
+  error: (_source = { source: '' }, _error_message = '') => {
+    const { source } = _source;
 
     const log = winston_setup('error', source);
     log.error(_error_message);
@@ -50,10 +46,8 @@ const logger = {
    * @description Logs the current NODE_ENV to the console.
    * @param {Object} _log_options - The options for the log.
    */
-  node_env: (_log_options = { _level: {} }) => {
-    _log_options._level = _log_options || { level: 'debug' };
-
-    const { level } = _log_options._level;
+  node_env: (_log_options = {}) => {
+    const { level } = _log_options;
 
     const log = winston_setup(level, 'NODE_ENV');
     log.log(level, NODE_ENV);
@@ -69,8 +63,9 @@ const logger = {
    * logger.is_schema_strict('User', User_model.schema.options.strict);
    */
   is_schema_strict: (_model_name, _schema_strict_option) => {
-    const log = winston_setup('info', 'schema');
-    log.log('info', `${_model_name} strict mode: ${_schema_strict_option}`);
+    const level = 'debug';
+    const log = winston_setup(level, 'schema');
+    log.log(level, `${_model_name} strict: ${_schema_strict_option}`);
   },
   // ---------------------------------------------------------
 
