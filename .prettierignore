@@ -1,6 +1,7 @@
 # Ignore specific files
 *.log
 *.txt
+.env
 
 # Ignore specific folders
 node_modules/
