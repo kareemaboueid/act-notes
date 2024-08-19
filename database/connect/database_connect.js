@@ -2,56 +2,56 @@ import mongoose from 'mongoose';
 import logger from '../../logging/logger.js';
 import {
   NODE_ENV,
+  DB_REAL,
+  DB_TEST,
   DB_USERNAME,
   DB_PASSWORD,
-  DB_CLOUD_REAL,
-  DB_CLOUD_TEST,
 } from '../../configs/env.cnfg.js';
 
 /**
  * ### Connect to the MongoDB database via Mongoose.
+ * @param {string} _db_uri The database URI to connect to.
  * @returns {Promise<void>} - Returns a promise (void).
  */
-const database_connect = async () => {
+const database_connect = async (_db_uri) => {
   try {
     // ------ START ------ //
 
-    // set up the MongoDB URI:
-    const db_username = DB_USERNAME;
-    const db_password = DB_PASSWORD;
-    const db_test = DB_CLOUD_TEST.replace('<U>', db_username).replace(
-      '<P>',
-      db_password,
-    );
-    const db_real = DB_CLOUD_REAL.replace('<U>', db_username).replace(
-      '<P>',
-      db_password,
-    );
-    const _mongodb_uri = NODE_ENV === 'development' ? db_test : db_real;
+    // check if the database URI is provided:
+    if (!_db_uri) {
+      throw new Error('Database URI is required!');
+    }
+
+    // define the database URI:
+    const db_uri = _db_uri
+      .replace('%USERNAME%', DB_USERNAME)
+      .replace('%PASSWORD%', DB_PASSWORD)
+      .replace('%DBNAME%', NODE_ENV === 'development' ? DB_TEST : DB_REAL);
 
     // define the database connection:
-    const db_connection = await mongoose.connect(String(_mongodb_uri));
+    const db_connect = await mongoose.connect(db_uri);
+    const db_connection = db_connect.connection;
 
-    // define the database connection states and details:
-    const db_state_msg = {
-      0: 'disconnected',
-      1: 'connected',
-      2: 'connecting',
-      3: 'disconnecting',
-      99: 'uninitialized',
+    // define the database info:
+    const db_info = {
+      msg: {
+        0: 'disconnected',
+        1: 'connected',
+        2: 'connecting',
+        3: 'disconnecting',
+        99: 'uninitialized',
+      },
+      state: db_connection.readyState,
+      host: db_connection.host ? 'Atlas' : 'local',
+      name: db_connection.name,
     };
-    const db_state = db_connection.connection.readyState;
-    const db_host = db_connection.connection.host ? 'Atlas' : 'local';
-    const db_port = db_connection.connection.port;
-    const db_name = db_connection.connection.name;
 
     // log the connection details: (only in development)
     if (NODE_ENV === 'development') {
       logger.set({ level: 'info', source: 'database' }, [
-        `STATE: ${db_state_msg[db_state]}`,
-        `HOST: ${db_host}`,
-        `PORT: ${db_port}`,
-        `DB: ${db_name}`,
+        `(${db_info.name})`,
+        `STATUS: ${db_info.msg[db_info.state]}`,
+        `HOST: ${db_info.host}`,
       ]);
     }
 
