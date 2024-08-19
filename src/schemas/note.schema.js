@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import user_db_naming from '../../../database/namings/user_naming.js';
 
 /** ### Note Schema */
 const note_schema = new mongoose.Schema(
@@ -41,7 +40,7 @@ const note_schema = new mongoose.Schema(
 
     CREATED_BY: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: user_db_naming.M,
+      ref: 'User',
     },
   },
 

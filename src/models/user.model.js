@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import user_schema from '../../schemas/user/user.schema.js';
-import { SALT_ROUNDS } from '../../../configs/env.cnfg.js';
-import user_db_naming from '../../../database/namings/user_naming.js';
+import user_schema from '../schemas/user.schema.js';
+import { SALT_ROUNDS } from '../../configs/env.cnfg.js';
 
 // bcrypt password before saving:
 user_schema.pre('save', async function (next) {
@@ -31,10 +30,6 @@ user_schema.methods.exclude = async function (_exluded_data) {
 };
 
 /** ### User Model */
-const User_model = mongoose.model(
-  user_db_naming.M,
-  user_schema,
-  user_db_naming.C,
-);
+const User_model = mongoose.model('User', user_schema, 'users');
 
 export default User_model;

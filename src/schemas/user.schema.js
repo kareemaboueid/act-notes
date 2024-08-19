@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import * as EmailValidator from 'email-validator';
-import vld_validate_password from '../../../validations/validate_password.vld.js';
 
 /** ### User Schema */
 const user_schema = new mongoose.Schema(
@@ -46,8 +45,15 @@ const user_schema = new mongoose.Schema(
       type: String,
       trim: true,
       required: [true, 'Password is required'],
+      minlength: [6, 'Password is too short, minimum 6 characters'],
+      maxlength: [16, 'Password is too long, maximum 16 characters'],
       validate(_value) {
-        vld_validate_password(_value);
+        if (_value.toLowerCase().includes('password')) {
+          throw new Error('Password cannot contain the word "password"');
+        }
+        if (_value.includes(' ')) {
+          throw new Error('Password cannot contain spaces');
+        }
       },
     },
 
