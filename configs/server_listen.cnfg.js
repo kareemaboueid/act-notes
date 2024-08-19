@@ -13,9 +13,7 @@ const server_listen = (_app, _port) => {
     _app.listen(Number(_port), () => {
       if (NODE_ENV === 'development') {
         logger.set({ level: 'info', source: 'server' }, [
-          'STATE: listening',
-          `PORT: ${_port}`,
-          `HOST: http://localhost:${_port}`,
+          `Listening [http://127.0.0.1:${_port}]`,
         ]);
       }
     });
