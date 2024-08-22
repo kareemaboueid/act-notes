@@ -22,10 +22,6 @@ const update_schema_one = async (
   try {
     // ------ START ------ //
 
-    // get the new field key and value:
-    // _new_field._key = _new_field;
-    // _new_field._value = _new_field;
-
     // destructure the new field key and value:
     const { key } = _new_field._key;
     const { value } = _new_field._value;

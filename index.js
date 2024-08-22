@@ -23,7 +23,7 @@ import mw_handle_global_errors from './middlewares/handle_global_errors.mw.js';
 import { DB_URI, NODE_ENV, PORT } from './configs/env.cnfg.js';
 
 // CONFIGS & DB:
-import database_connect from './database/connect/database_connect.js';
+import database_connect from './database/connection/database_connect.js';
 import server_listen from './configs/server_listen.cnfg.js';
 import logger from './logging/logger.js';
 
